@@ -7,6 +7,7 @@ $files = @{
     "8k_earth_normal_map.jpg" = "earth_normal_8k.jpg"
     "8k_earth_specular_map.jpg" = "earth_specular_8k.jpg"
     "8k_earth_clouds.jpg" = "earth_clouds_8k.jpg"
+    "8k_earth_nightmap.jpg" = "earth_nightmap_8k.jpg"
 }
 
 foreach ($key in $files.Keys) {
