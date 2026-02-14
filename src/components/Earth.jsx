@@ -77,7 +77,7 @@ export function Earth({ children, isInteracting, layers }) {
                             map={cloudsMap}
                             transparent={true}
                             opacity={0.4}
-                            depthWrite={true}
+                            depthWrite={false}
                             side={THREE.DoubleSide}
                             blending={THREE.AdditiveBlending}
                         />
