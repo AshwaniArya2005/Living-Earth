@@ -1,16 +1,32 @@
-import React, { useRef } from 'react'
-import { useFrame, useLoader } from '@react-three/fiber'
+import React, { useRef, useEffect } from 'react'
+import { useFrame, useLoader, useThree } from '@react-three/fiber'
 import { TextureLoader } from 'three'
 import * as THREE from 'three'
 
-import DayMap from '../assets/textures/earth_daymap.jpg'
+import DayMap from '../assets/textures/earth_daymap_8k.jpg'
 import NormalMap from '../assets/textures/earth_normal.jpg'
 import SpecularMap from '../assets/textures/earth_specular.jpg'
-import CloudsMap from '../assets/textures/earth_clouds.png'
+import CloudsMap from '../assets/textures/earth_clouds_8k.jpg'
 import { Atmosphere } from './Atmosphere'
 
 export function Earth({ children, isInteracting, layers }) {
     const [colorMap, normalMap, specularMap, cloudsMap] = useLoader(TextureLoader, [DayMap, NormalMap, SpecularMap, CloudsMap])
+    const { gl } = useThree()
+
+    // Improve texture sharpness with Anisotropy
+    useEffect(() => {
+        const setAnisotropy = (map) => {
+            if (map) {
+                map.anisotropy = gl.capabilities.getMaxAnisotropy()
+                map.needsUpdate = true
+            }
+        }
+        setAnisotropy(colorMap)
+        setAnisotropy(normalMap)
+        setAnisotropy(specularMap)
+        setAnisotropy(cloudsMap)
+    }, [colorMap, normalMap, specularMap, cloudsMap, gl])
+
 
     // Default layers if not provided
     const showClouds = layers ? layers.clouds : true;
