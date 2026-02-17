@@ -28,6 +28,8 @@ export function Scene({ onMarkerClick, layers }) {
                         zoomSpeed={0.6}
                         panSpeed={0.5}
                         rotateSpeed={0.4}
+                        minDistance={3.5}
+                        maxDistance={20}
                         onStart={() => setIsInteracting(true)}
                         onEnd={() => setIsInteracting(false)}
                     />
